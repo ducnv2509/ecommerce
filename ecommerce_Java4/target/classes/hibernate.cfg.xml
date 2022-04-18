@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+
+<!--        <property name="show_sql">true</property>-->
+
+        <!-- Show Session Metrics -->
+        <property name="generate_statistics">true</property>
+
+<!--        <property name="connection.driver_class">com.p6spy.engine.spy.P6SpyDriver</property>-->
+<!--        <property name="connection.url">jdbc:p6spy:mysql://192.168.64.2:3306/gp_system?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8</property>-->
+<!--        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>-->
+        <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+        <property name="hibernate.connection.url">jdbc:sqlserver://localhost;database=ecommerce</property>
+        <property name="hibernate.connection.username">sa</property>
+        <property name="hibernate.connection.password">123</property>
+
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
+        <property name="show_sql">true</property>
+        <property name="cache.use_query_cache">false</property>
+        <property name="cache.use_second_level_cache">false</property>
+<!--        <property name="show_sql">true</property>-->
+        <property name="hibernate.order_updates">true</property>
+        <property name="hibernate.order_inserts">true</property>
+        <property name="hibernate.jdbc.batch_size">20</property>
+<!--        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>-->
+<!--        <property name="hibernate.current_session_context_class">org.hibernate.context.ThreadLocalSessionContext</property>-->
+
+
+        <!--  For storing webservices call records -->
+        <mapping class="entity.Products"/>
+
+
+    </session-factory>
+</hibernate-configuration>
