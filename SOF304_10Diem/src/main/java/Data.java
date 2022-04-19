@@ -5,8 +5,8 @@ public class Data {
     @DataProvider
     public static Object[][] dataCreateAccount() {
         return new Object[][]{
-                {"demo1@gmail.com", "ducnv2509", "ducnv2509"},
-                {"demo2@gmail.com", "ducnv2509", "ducnv2509"},
+                {"ms12adaadaas@gmail.com", "ducnv2509", "ducnv2509"},
+                {"bcg12dhgaaaan@gmail.com", "ducnv2509", "ducnv2509"},
         };
     }
 
@@ -29,8 +29,8 @@ public class Data {
     @DataProvider
     public static Object[][] dataPasswordSix() {
         return new Object[][]{
-                {"test3@gmail.com", "123456", "123456"},
-                {"test4@gmail.com", "654321", "654321"},
+                {"demo1231@gmail.com", "123456", "123456"},
+                {"demo1231231@gmail.com", "654321", "654321"},
         };
     }
 
@@ -38,8 +38,8 @@ public class Data {
     @DataProvider
     public static Object[][] dataPasswordSeven() {
         return new Object[][]{
-                {"test3@gmail.com", "1234567", "1234567"},
-                {"test4@gmail.com", "7654321", "7654321"},
+                {"demonnn@gmail.com", "1234567", "1234567"},
+                {"demaaaa@gmail.com", "7654321", "7654321"},
         };
     }
 

@@ -3,10 +3,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class TC1_PH14435 {
     WebDriver driver;
@@ -23,10 +20,10 @@ public class TC1_PH14435 {
 
     }
 
+
     public void autoText(String email, String password, String re_pass) {
         driver.findElement(By.xpath("//header/div[1]/div[2]/div[1]/a[1]/span[2]")).click();
-        driver.findElement(By.xpath("//header/div[1]/div[5]/div[1]/ul[1]/li[1]/a[1]")).click();
-        driver.findElement(By.xpath("//body/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[1]/div[1]/div[2]/a[1]")).click();
+        driver.findElement(By.xpath("//a[contains(text(),'Register')]")).click();
         driver.findElement(By.xpath("//input[@id='firstname']")).clear();
         driver.findElement(By.xpath("//input[@id='firstname']")).sendKeys(firstName);
         driver.findElement(By.xpath("//input[@id='middlename']")).clear();
@@ -42,12 +39,18 @@ public class TC1_PH14435 {
         driver.findElement(By.xpath("//span[contains(text(),'Register')]")).click();
     }
 
-    public void logOut(){
+    @BeforeMethod
+    public void af() {
+        driver.manage().deleteAllCookies();
+    }
+
+
+    public void logOut() {
         driver.findElement(By.xpath("//header/div[1]/div[2]/div[1]/a[1]/span[2]")).click();
         driver.findElement(By.xpath("//a[contains(text(),'Log Out')]")).click();
     }
 
-    @Test(dataProvider = "dataCreateAccount", dataProviderClass = Data.class)
+    @Test(dataProvider = "dataCreateAccount", dataProviderClass = Data.class, priority = 1)
     public void testCreateAccount(String email, String password, String re_pass) {
         autoText(email, password, re_pass);
         String textHello = ("Hello, " + firstName + " " + middleName + " " + lastName + "!");
@@ -55,21 +58,21 @@ public class TC1_PH14435 {
         logOut();
     }
 
-    @Test(dataProvider = "dataSameAccount", dataProviderClass = Data.class)
+    @Test(dataProvider = "dataSameAccount", dataProviderClass = Data.class, priority = 4)
     public void testCreateSameAccount(String email, String password, String re_pass) {
         autoText(email, password, re_pass);
         String text = driver.findElement(By.xpath("//*[@id=\"top\"]/body/div/div/div[2]/div/div/div/ul/li/ul/li/span")).getText();
         Assert.assertEquals(text, "There is already an account with this email address. If you are sure that it is your email address, click here to get your password and access your account.");
     }
 
-    @Test(dataProvider = "dataPasswordFive", dataProviderClass = Data.class)
+    @Test(dataProvider = "dataPasswordFive", dataProviderClass = Data.class, priority = 5)
     public void testPasswordFiveText(String email, String password, String re_pass) {
         autoText(email, password, re_pass);
         String text = driver.findElement(By.xpath("//div[@id='advice-validate-password-password']")).getText();
         Assert.assertEquals(text, "Please enter 6 or more characters without leading or trailing spaces.");
     }
 
-    @Test(dataProvider = "dataPasswordSix", dataProviderClass = Data.class)
+    @Test(dataProvider = "dataPasswordSix", dataProviderClass = Data.class, priority = 2)
     public void testPasswordSixText(String email, String password, String re_pass) {
         autoText(email, password, re_pass);
         String textHello = ("Hello, " + firstName + " " + middleName + " " + lastName + "!");
@@ -77,7 +80,7 @@ public class TC1_PH14435 {
         logOut();
     }
 
-    @Test(dataProvider = "dataPasswordSeven", dataProviderClass = Data.class)
+    @Test(dataProvider = "dataPasswordSeven", dataProviderClass = Data.class, priority = 3)
     public void testPasswordSevenText(String email, String password, String re_pass) {
         autoText(email, password, re_pass);
         String textHello = ("Hello, " + firstName + " " + middleName + " " + lastName + "!");
@@ -85,12 +88,13 @@ public class TC1_PH14435 {
         logOut();
     }
 
-    @Test(dataProvider = "dataPasswordValidate", dataProviderClass = Data.class)
+    @Test(dataProvider = "dataPasswordValidate", dataProviderClass = Data.class, priority = 6)
     public void testPasswordValidate(String email, String password, String re_pass) {
         autoText(email, password, re_pass);
         String text = driver.findElement(By.xpath("//div[@id='advice-validate-cpassword-confirmation']")).getText();
         Assert.assertEquals(text, "Please make sure your passwords match.");
     }
+
     @AfterTest
     public void afterTest() {
         driver.close();
